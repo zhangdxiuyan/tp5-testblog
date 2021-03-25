@@ -1,0 +1,108 @@
+<!DOCTYPE html >
+<html >
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>练习</title>
+        
+        <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7">
+		<link href="__RECEPTION__/style/lady.css" type="text/css" rel="stylesheet" />
+		<script type='text/javascript' src='__RECEPTION__/style/ismobile.js'></script>
+    </head>
+
+    <body>
+
+        {include file='common/header' /}
+
+        <!--顶部通栏-->
+        
+
+        <div class="position"><a href="{:url('index/index')}">主页</a> > <a href="{:url('cate/index',array('cateid'=>$cates['id']))}">{$cates.catename}</a> >  </div>
+
+        <div class="overall">
+            <div class="left">
+                <div class="scrap">
+                    <h1>{$articles.title}</h1>
+                    <div class="spread">
+                        <span class="writor">发布时间：{$articles.time|date='Y-m-d H:i'}</span>
+                        <span class="writor">编辑：{$articles.author}</span>
+                        <span class="writor">标签：
+                            <?php
+                                $kws=explode(',',$articles['keywords']);
+                                foreach($kws as $k=>$v){
+                                    echo "<a href='#'>$v</a>";
+                                }
+                            ?>
+                        </span>
+                        <span class="writor">热度：{$articles.click}</span>
+                    </div>
+                </div>
+
+
+                <div class="takeaway">
+                    <span class="btn arr-left"></span>
+                    <p class="jjxq">{$articles.brief}
+                    </p>
+                    <span class="btn arr-right"></span>
+                </div>
+
+                  <script src='/jiehun/goto/my-65541.js' language='javascript'></script>
+
+                <div class="substance">
+                    {$articles.content}
+                </div>
+
+ 
+                <div class="biaoqian">
+                   
+                </div>
+
+
+
+                <!--相关阅读 -->
+                <div class="xgread">
+                    <div class="til"><h4>相关阅读</h4></div>
+                    <div class="lef"><!--相关阅读主题链接-->
+                        <script src='#' language='javascript'>
+                        </script>
+                    </div>
+                    {volist name="recommendres" id="vo"}
+                    <div class="rig">
+                        <ul>
+                            <li>
+                                <a href="{:url('article/index',array('arid'=>$vo[0]))}" target="_blank">
+                                    {$vo.3}
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    {/volist}
+                </div>
+
+                <!--频道推荐-->
+                <div class="hotsnew">
+                    <div class="til"><h4>频道推荐</h4></div>
+                    <ul>
+                        {volist name="recres" id="vo"}
+                        <li>
+                            <div class="tu">
+                                <a href="{:url('article/index',array('arid'=>$vo['id']))}" target="_blank">
+                                    <img src="{if condition="$vo['pic'] neq ''"}__BACKSTAGE__{$vo.pic}{else}__BACKSTAGE__\images\zwslt.jpg{/if}" alt=""/>
+                                </a>
+                            </div>
+                            <p>
+                                <a href="{:url('article/index',array('arid'=>$vo['id']))}">{$vo.title}</a>
+                            </p>
+                        </li>
+                        {/volist}
+                    </ul>
+                </div>		
+            </div>
+
+        {include file='common/right' /}
+    
+</div>
+
+        {include file='common/foot' /}
+
+    </body>
+</html>

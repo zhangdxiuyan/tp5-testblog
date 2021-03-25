@@ -1,0 +1,68 @@
+<!DOCTYPE html >
+<head>
+<title>练习</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+<link href="__RECEPTION__/style/lady.css" type="text/css" rel="stylesheet" />
+<script type='text/javascript' src='__RECEPTION__/style/ismobile.js'></script>
+</head>
+
+<body>
+
+		{include file="common/header" /}
+<!--顶部通栏-->
+
+
+<div class="position"></div>
+
+<div class="overall">
+
+	<div class="left">
+				{volist name="articles" id="vo"}
+				<div class="xnews2">
+					<div class="pic">
+						<a target="_blank" href="{:url('article/index',array('arid'=>$vo['id']))}">
+							<img src="{if condition="$vo['pic'] neq ''"}__BACKSTAGE__{$vo.pic}{else}__BACKSTAGE__/images/zwslt.jpg{/if}" alt="{$vo.title}"/>
+						</a>
+					</div>
+					<div class="dec">
+						<h3>
+							<a target="_blank" href="{:url('article/index',array('arid'=>$vo['id']))}">{$vo.title}</a>
+						</h3>
+						<div class="time">发布时间：{$vo.time|date='Y-m-d H:i'}</div>
+						<p>
+							{$vo.brief}
+			 			</p>
+			 			<div class="time">
+			 				<?php
+								$kws=explode(',',$vo['keywords']);
+								foreach($kws as $k=>$v){
+									echo "<a href='#'>$v</a>" ;
+								}
+							?>
+						</div>
+					</div>
+				</div>
+	
+				{/volist}
+	</div>
+				
+				{include file='common/right' /}
+				<div class="pages">
+					<div class="plist" >
+						{$articles|raw}
+					</div>
+				</div>
+	
+
+</div>
+	
+		
+	
+
+
+		{include file='common/foot' /}
+
+
+</body>
+</html>
